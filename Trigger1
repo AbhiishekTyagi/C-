@@ -1,0 +1,389 @@
+Last login: Mon Jun  3 19:00:51 on ttys000
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % mysql -u root -p;
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % mysql -u root -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show schemas;
++----------------------+
+| Database             |
++----------------------+
+| ABES                 |
+| bankmanagementsystem |
+| Book_shop            |
+| DBMS                 |
+| information_schema   |
+| mysql                |
+| performance_schema   |
+| Practice             |
+| RadheKrishna         |
+| Shirt                |
+| sys                  |
+| Triggers             |
+| View                 |
++----------------------+
+13 rows in set (0.00 sec)
+
+mysql> use practice;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_practice |
++--------------------+
+| account            |
+| cats               |
+| cats2              |
+| child              |
+| Children           |
+| customer           |
+| employee           |
+| Feedback           |
+| hospital           |
+| Order1             |
+| Parents            |
+| person             |
+| radhey             |
+| Restaurant         |
+| student            |
++--------------------+
+15 rows in set (0.01 sec)
+
+mysql> select *from empoylee;
+ERROR 1146 (42S02): Table 'practice.empoylee' doesn't exist
+mysql> select *from employee;
++--------+------------+--------------+---------------+
+| name   | occupation | working_date | working_hours |
++--------+------------+--------------+---------------+
+| Robin  | Scientist  | 2020-10-04   | 12            |
+| Warner | Engineer   | 2020-10-04   | 100           |
++--------+------------+--------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> DELIMITER //
+mysql> create trigger ins 
+    -> before insert on employee for each row
+    -> BEGIN
+    -> if New.working_hours < 0 tHEN SET new.working_hours =0;
+    -> end if;
+    -> END //
+ERROR 1359 (HY000): Trigger already exists
+mysql> DELIMITER //
+mysql> create trigger ans
+    -> before insert on employee for each row 
+    -> Begin
+    -> if New.occupation="Engineer" then set 
+    -> New.occupation="MCA"; END if;
+    -> end //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> Delimiter //
+mysql> create trigger ds
+    -> before update on employee for each row
+    -> Begin
+    -> if new.name="Abhishek" then set new.name="Radha" end if;
+    -> end //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end if;
+end' at line 4
+mysql> Delimiter //
+mysql> create trigger radha before update on employee for rach row 
+    -> ;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rach row' at line 1
+mysql>  Delimiter //
+mysql> create trigger radha before update on employee
+    -> for each row Begin
+    -> if new.name="Abhishek" the set new.name="Radha"; end if;
+    -> end //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the set new.name="Radha"; end if; 
+end' at line 3
+mysql> create trigger radha before update on employee for each row Begin if new.name="Abhishek" the set new.name="Radha"; end if;  end//;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the set new.name="Radha"; end if;  end' at line 1
+    -> //
+ERROR 1065 (42000): Query was empty
+mysql> Delimiter //
+mysql> create trigger radha
+    -> before update 
+    -> on employee for each row 
+    -> Begin
+    -> if New.name="Abhishek" thebn set New.name="Radha"; end if;
+    -> end //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'thebn set New.name="Radha"; end if;
+end' at line 5
+mysql> Delimiter //
+mysql> create trigger radha 
+    -> before update on employee for each row
+    -> Begin
+    -> if New.name='Abhishek' then set New.name='Radha'; end if;
+    -> end //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show triggers;
+    -> //
++---------+--------+----------+--------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| Trigger | Event  | Table    | Statement                                                                      | Timing | Created                | sql_mode                                                                                                              | Definer        | character_set_client | collation_connection | Database Collation |
++---------+--------+----------+--------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| ins     | INSERT | employee | if new.working_hours<0 then set new.working_hours=0; end if                    | BEFORE | 2024-06-03 19:22:24.12 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| ans     | INSERT | employee | Begin
+if New.occupation="Engineer" then set 
+New.occupation="MCA"; END if;
+end | BEFORE | 2024-06-03 19:32:43.60 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| radha   | UPDATE | employee | Begin
+if New.name='Abhishek' then set New.name='Radha'; end if;
+end            | BEFORE | 2024-06-03 19:41:52.73 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
++---------+--------+----------+--------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee;
+    -> //
++--------+------------+--------------+---------------+
+| name   | occupation | working_date | working_hours |
++--------+------------+--------------+---------------+
+| Robin  | Scientist  | 2020-10-04   | 12            |
+| Warner | Engineer   | 2020-10-04   | 100           |
++--------+------------+--------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> update employee 
+    -> set name="Abhishek"
+    -> where working_hours=12;
+    -> //
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
+    -> //
++--------+------------+--------------+---------------+
+| name   | occupation | working_date | working_hours |
++--------+------------+--------------+---------------+
+| Radha  | Scientist  | 2020-10-04   | 12            |
+| Warner | Engineer   | 2020-10-04   | 100           |
++--------+------------+--------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> update employee  set name="Abhi" where working_hours=12;//
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
+    -> //
++--------+------------+--------------+---------------+
+| name   | occupation | working_date | working_hours |
++--------+------------+--------------+---------------+
+| Abhi   | Scientist  | 2020-10-04   | 12            |
+| Warner | Engineer   | 2020-10-04   | 100           |
++--------+------------+--------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> update employee  set name="Abhishek" where working_hours=100;//
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
+    -> //
++-------+------------+--------------+---------------+
+| name  | occupation | working_date | working_hours |
++-------+------------+--------------+---------------+
+| Abhi  | Scientist  | 2020-10-04   | 12            |
+| Radha | Engineer   | 2020-10-04   | 100           |
++-------+------------+--------------+---------------+
+2 rows in set (0.01 sec)
+
+mysql> 
+  [Restored 3 Jun 2024 at 8:45:54 PM]
+Last login: Mon Jun  3 20:45:52 on console
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % mysql -u root -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show schemas;
++----------------------+
+| Database             |
++----------------------+
+| ABES                 |
+| bankmanagementsystem |
+| Book_shop            |
+| DBMS                 |
+| information_schema   |
+| mysql                |
+| performance_schema   |
+| Practice             |
+| RadheKrishna         |
+| Shirt                |
+| sys                  |
+| Triggers             |
+| View                 |
++----------------------+
+13 rows in set (0.01 sec)
+
+mysql> connect practice;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Connection id:    9
+Current database: practice
+
+mysql> show tables;
++--------------------+
+| Tables_in_practice |
++--------------------+
+| account            |
+| cats               |
+| cats2              |
+| child              |
+| Children           |
+| customer           |
+| employee           |
+| Feedback           |
+| hospital           |
+| Order1             |
+| Parents            |
+| person             |
+| radhey             |
+| Restaurant         |
+| student            |
++--------------------+
+15 rows in set (0.00 sec)
+
+mysql> show triggers;
++---------+--------+----------+--------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| Trigger | Event  | Table    | Statement                                                                      | Timing | Created                | sql_mode                                                                                                              | Definer        | character_set_client | collation_connection | Database Collation |
++---------+--------+----------+--------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| ins     | INSERT | employee | if new.working_hours<0 then set new.working_hours=0; end if                    | BEFORE | 2024-06-03 19:22:24.12 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| ans     | INSERT | employee | Begin
+if New.occupation="Engineer" then set 
+New.occupation="MCA"; END if;
+end | BEFORE | 2024-06-03 19:32:43.60 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| radha   | UPDATE | employee | Begin
+if New.name='Abhishek' then set New.name='Radha'; end if;
+end            | BEFORE | 2024-06-03 19:41:52.73 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
++---------+--------+----------+--------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+3 rows in set (0.01 sec)
+
+mysql> show tabls;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabls' at line 1
+mysql> show tables;
++--------------------+
+| Tables_in_practice |
++--------------------+
+| account            |
+| cats               |
+| cats2              |
+| child              |
+| Children           |
+| customer           |
+| employee           |
+| Feedback           |
+| hospital           |
+| Order1             |
+| Parents            |
+| person             |
+| radhey             |
+| Restaurant         |
+| student            |
++--------------------+
+15 rows in set (0.00 sec)
+
+mysql> desc student;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Stu_Id      | int         | YES  |     | NULL    |       |
+| Stu_name    | varchar(20) | YES  |     | NULL    |       |
+| stu_Age     | int         | YES  |     | NULL    |       |
+| stu_Marks   | float       | YES  |     | NULL    |       |
+| Father_Name | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select * from student;
+Empty set (0.00 sec)
+
+mysql> select * from account;
+Empty set (0.01 sec)
+
+mysql> insert into account values(1,12000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from account;
++----------+----------+
+| acct_num | amount   |
++----------+----------+
+|        1 | 12000.00 |
++----------+----------+
+1 row in set (0.00 sec)
+
+mysql> Delimiter //
+mysql> create trigger upd_check before insert on
+    -> account for each row 
+    -> Begin
+    -> if New.amount < 0 then set New.amount=0;
+    -> elseif New.amount >100 then set New.amount=100;
+    -> end if;
+    -> End //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show triggers;
+    -> //;
++-----------+--------+----------+------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| Trigger   | Event  | Table    | Statement                                                                                                  | Timing | Created                | sql_mode                                                                                                              | Definer        | character_set_client | collation_connection | Database Collation |
++-----------+--------+----------+------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| upd_check | INSERT | account  | Begin
+if New.amount < 0 then set New.amount=0;
+elseif New.amount >100 then set New.amount=100;
+end if;
+End | BEFORE | 2024-06-03 21:00:10.40 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| ins       | INSERT | employee | if new.working_hours<0 then set new.working_hours=0; end if                                                | BEFORE | 2024-06-03 19:22:24.12 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| ans       | INSERT | employee | Begin
+if New.occupation="Engineer" then set 
+New.occupation="MCA"; END if;
+end                             | BEFORE | 2024-06-03 19:32:43.60 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| radha     | UPDATE | employee | Begin
+if New.name='Abhishek' then set New.name='Radha'; end if;
+end                                        | BEFORE | 2024-06-03 19:41:52.73 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
++-----------+--------+----------+------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+4 rows in set (0.01 sec)
+
+    -> //;
+ERROR 1065 (42000): Query was empty
+    -> //
+ERROR 1065 (42000): Query was empty
+mysql> insert into account values(2,-8);
+    -> //
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from account;
+    -> //
++----------+----------+
+| acct_num | amount   |
++----------+----------+
+|        1 | 12000.00 |
+|        2 |     0.00 |
++----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> 

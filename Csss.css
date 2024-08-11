@@ -1,0 +1,16 @@
+/*Css file for practice*/ 
+    div{
+        background-color:burlywood;
+        height: 200px;
+        width:200px;
+    }
+    h1{
+        color:brown;
+    }
+    @media(max-width:400px)
+    {
+        div{
+            height:100px;
+            width:100px;
+        }
+    }

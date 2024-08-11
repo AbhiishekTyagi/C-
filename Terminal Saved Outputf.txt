@@ -1,0 +1,1158 @@
+mysql> insert into voting2 values("Abhishek",25);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from voting2;
++----------+------+
+| Name     | Age  |
++----------+------+
+| Abhishek |   25 |
++----------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into voting2 values("Abhishek",25);
+ERROR 1062 (23000): Duplicate entry 'Abhishek' for key 'voting2.Name'
+mysql> create table voting2( Name varchar(25) not null unique,Constraint Not_Same, Age tinyint,
+ Constraint NotVoting check(age>=18) );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', Age tinyint, Constraint NotVoting check(age>=18) )' at line 1
+mysql> create table voting2( Name varchar(25) not null unique,Constraint Not_Same, Age tinyint, Constraint NotVoting check(age>=18) );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', Age tinyint, Constraint NotVoting check(age>=18) )' at line 1
+mysql> 
+  [Restored 30 May 2024 at 7:55:26 PM]
+Last login: Thu May 30 19:55:22 on console
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % cls;
+zsh: command not found: cls
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % clear;
+
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % pwd
+/Users/abhishektyagi_1
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % mysql -u root -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databses;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databses' at line 1
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| ABES                 |
+| bankmanagementsystem |
+| Book_shop            |
+| DBMS                 |
+| information_schema   |
+| mysql                |
+| performance_schema   |
+| Practice             |
+| RadheKrishna         |
+| Shirt                |
+| sys                  |
+| Triggers             |
+| View                 |
++----------------------+
+13 rows in set (0.02 sec)
+
+mysql> use Abes;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_abes |
++----------------+
+| companies      |
+| Palindrome     |
+| Palindrome2    |
+| Student        |
+| Teacher        |
+| Voting         |
+| voting2        |
++----------------+
+7 rows in set (0.01 sec)
+
+mysql> desc companies;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| supp_Id | tinyint      | NO   | PRI | NULL    | auto_increment |
+| Name    | varchar(25)  | NO   | UNI | NULL    |                |
+| phone   | varchar(10)  | NO   |     | NULL    |                |
+| address | varchar(123) | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from companies;
++---------+--------+---------+---------+
+| supp_Id | Name   | phone   | address |
++---------+--------+---------+---------+
+|       1 | Google | 1234567 | USA     |
+|       2 | Meta   | 1234517 | USA     |
++---------+--------+---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> create table house(
+    -> p_price int not null,
+    -> s_price int not null,
+    -> constraint s_price_gt_p_price check(s_price>=p_price)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc house;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| p_price | int  | NO   |     | NULL    |       |
+| s_price | int  | NO   |     | NULL    |       |
++---------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into house values(200,100);
+ERROR 3819 (HY000): Check constraint 's_price_gt_p_price' is violated.
+mysql> insert into house values(200,1000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from companies;
++---------+--------+---------+---------+
+| supp_Id | Name   | phone   | address |
++---------+--------+---------+---------+
+|       1 | Google | 1234567 | USA     |
+|       2 | Meta   | 1234517 | USA     |
++---------+--------+---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from house;
++---------+---------+
+| p_price | s_price |
++---------+---------+
+|     200 |    1000 |
++---------+---------+
+1 row in set (0.00 sec)
+
+mysql> create table house( p_price int not null, s_price int not null check(s_price>=p_price) );
+ERROR 3813 (HY000): Column check constraint 'house_chk_1' references other column.
+mysql> drop table houise;
+ERROR 1051 (42S02): Unknown table 'abes.houise'
+mysql> drop table house;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_abes |
++----------------+
+| companies      |
+| Palindrome     |
+| Palindrome2    |
+| Student        |
+| Teacher        |
+| Voting         |
+| voting2        |
++----------------+
+7 rows in set (0.00 sec)
+
+mysql> create table house( p_price int not null, s_price int not null check(s_price>=p_price) );
+ERROR 3813 (HY000): Column check constraint 'house_chk_1' references other column.
+mysql> create table Table(
+    -> Price Tinyint not null,
+    -> Value int not null check(price<=value));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Table(
+Price Tinyint not null,
+Value int not null check(price<=value))' at line 1
+mysql> create table Table(Price int not null, Value int not null check(price<=value));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Table(Price int not null, Value int not null check(price<=value))' at line 1
+mysql> create table Table(Price int not null, Value int not null,Constraint  checker  check(price<=value));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Table(Price int not null, Value int not null,Constraint  checker  check(price<=v' at line 1
+mysql> create table Window(
+    -> rows int not null,
+    -> column int not null check(rows>=column));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Window(
+rows int not null,
+column int not null check(rows>=column))' at line 1
+mysql> create table Window( rows int not null, column int not null,constraint checker check(rows>=column));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Window( rows int not null, column int not null,constraint checker check(rows>=co' at line 1
+mysql> create table Window(rows int not null, column int not null check(rows>=column));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Window(rows int not null, column int not null check(rows>=column))' at line 1
+mysql> create table window(
+    -> Rowsss tinyint not null,
+    -> Columnss tinyint not null check(Rowsss>=columnss));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'window(
+Rowsss tinyint not null,
+Columnss tinyint not null check(Rowsss>=columns' at line 1
+mysql> create table window( Rowsss tinyint not null, Columnss tinyint not null,constraint checker check(Rowsss>
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'window( Rowsss tinyint not null, Columnss tinyint not null,constraint checker ch' at line 1
+mysql> show tables;
++----------------+
+| Tables_in_abes |
++----------------+
+| companies      |
+| Palindrome     |
+| Palindrome2    |
+| Student        |
+| Teacher        |
+| Voting         |
+| voting2        |
++----------------+
+7 rows in set (0.00 sec)
+
+mysql> create table house(
+    -> p_price int not null,
+    -> 
+  [Restored 30 May 2024 at 9:06:59 PM]
+Last login: Thu May 30 21:06:57 on console
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % mysql -u root -p;
+Enter password: 
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % mysql -u root -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show schemas;
++----------------------+
+| Database             |
++----------------------+
+| ABES                 |
+| bankmanagementsystem |
+| Book_shop            |
+| DBMS                 |
+| information_schema   |
+| mysql                |
+| performance_schema   |
+| Practice             |
+| RadheKrishna         |
+| Shirt                |
+| sys                  |
+| Triggers             |
+| View                 |
++----------------------+
+13 rows in set (0.01 sec)
+
+mysql> use abes;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_abes |
++----------------+
+| companies      |
+| Palindrome     |
+| Palindrome2    |
+| Student        |
+| Teacher        |
+| Voting         |
+| voting2        |
++----------------+
+7 rows in set (0.00 sec)
+
+mysql> create table window(
+    -> Rows int not null,
+    -> columns int not null,
+    -> check(rows<=columns));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'window(
+Rows int not null,
+columns int not null,
+check(rows<=columns))' at line 1
+mysql> create table window( Rows int not null, columns int not null, Constraints chek check(rows<=columns));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'window( Rows int not null, columns int not null, Constraints chek check(rows<=co' at line 1
+mysql> create table window( Rows int not null, columns int not null, check(rows<=columns));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'window( Rows int not null, columns int not null, check(rows<=columns))' at line 1
+mysql> creare table house(
+    -> purchase_price int not null,
+    -> Sale_price int not null,
+    -> constraints sp check(sales_price>=purchase_price));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'creare table house(
+purchase_price int not null,
+Sale_price int not null,
+constr' at line 1
+mysql> create table house( purchase_price int not null, Sale_price int not null, constraint sp
+check(sales_price>=purchase_price));
+ERROR 3820 (HY000): Check constraint 'sp' refers to non-existing column 'sales_price'.
+mysql> create table house( purchase_price int not null, Sale_price int not null, constraint sp
+check(sale_price>=purchase_price));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc house;
++----------------+------+------+-----+---------+-------+
+| Field          | Type | Null | Key | Default | Extra |
++----------------+------+------+-----+---------+-------+
+| purchase_price | int  | NO   |     | NULL    |       |
+| Sale_price     | int  | NO   |     | NULL    |       |
++----------------+------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> insert into house values(12,13);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into house values(120,13);
+ERROR 3819 (HY000): Check constraint 'sp' is violated.
+mysql> create table house( purchase_price int not null, Sale_price int not null, check(sale_price>=purchase_price));
+ERROR 1050 (42S01): Table 'house' already exists
+mysql> create table house1( purchase_price int not null, Sale_price int not null, check(sale_price>=purchase_price));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc house1;
++----------------+------+------+-----+---------+-------+
+| Field          | Type | Null | Key | Default | Extra |
++----------------+------+------+-----+---------+-------+
+| purchase_price | int  | NO   |     | NULL    |       |
+| Sale_price     | int  | NO   |     | NULL    |       |
++----------------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into house values(120,13);
+ERROR 3819 (HY000): Check constraint 'sp' is violated.
+mysql> insert into house1 values(120,13);
+ERROR 3819 (HY000): Check constraint 'house1_chk_1' is violated.
+mysql> create table user(
+    -> Name varchar(20) not null,
+    -> Age int  not null, 
+    -> unique(Name,Age));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into user values("a",12),("A",13));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> insert into user values("a",12),("A",13);
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from user;
++------+-----+
+| Name | Age |
++------+-----+
+| a    |  12 |
+| A    |  13 |
++------+-----+
+2 rows in set (0.00 sec)
+
+mysql> insert into user values("a",12),("a",12);
+ERROR 1062 (23000): Duplicate entry 'a-12' for key 'user.Name'
+mysql> show tables;
++----------------+
+| Tables_in_abes |
++----------------+
+| companies      |
+| house          |
+| house1         |
+| Palindrome     |
+| Palindrome2    |
+| Student        |
+| Teacher        |
+| user           |
+| Voting         |
+| voting2        |
++----------------+
+10 rows in set (0.01 sec)
+
+mysql> desc house;
++----------------+------+------+-----+---------+-------+
+| Field          | Type | Null | Key | Default | Extra |
++----------------+------+------+-----+---------+-------+
+| purchase_price | int  | NO   |     | NULL    |       |
+| Sale_price     | int  | NO   |     | NULL    |       |
++----------------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from house;
++----------------+------------+
+| purchase_price | Sale_price |
++----------------+------------+
+|             12 |         13 |
++----------------+------------+
+1 row in set (0.00 sec)
+
+mysql> Alter table house add column Profit int ;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc house;
++----------------+------+------+-----+---------+-------+
+| Field          | Type | Null | Key | Default | Extra |
++----------------+------+------+-----+---------+-------+
+| purchase_price | int  | NO   |     | NULL    |       |
+| Sale_price     | int  | NO   |     | NULL    |       |
+| Profit         | int  | YES  |     | NULL    |       |
++----------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from house;
++----------------+------------+--------+
+| purchase_price | Sale_price | Profit |
++----------------+------------+--------+
+|             12 |         13 |   NULL |
++----------------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> update house set profit=1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from house;
++----------------+------------+--------+
+| purchase_price | Sale_price | Profit |
++----------------+------------+--------+
+|             12 |         13 |      1 |
++----------------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> alter table house  drop column profit;
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc house;
++----------------+------+------+-----+---------+-------+
+| Field          | Type | Null | Key | Default | Extra |
++----------------+------+------+-----+---------+-------+
+| purchase_price | int  | NO   |     | NULL    |       |
+| Sale_price     | int  | NO   |     | NULL    |       |
++----------------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select 8 from house;
++---+
+| 8 |
++---+
+| 8 |
++---+
+1 row in set (0.00 sec)
+
+mysql> select * from house;
++----------------+------------+
+| purchase_price | Sale_price |
++----------------+------------+
+|             12 |         13 |
++----------------+------------+
+1 row in set (0.00 sec)
+
+mysql> Alter table house add column Profit int not null ;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from house;
++----------------+------------+--------+
+| purchase_price | Sale_price | Profit |
++----------------+------------+--------+
+|             12 |         13 |      0 |
++----------------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> alter table house  drop column profit;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from house;
++----------------+------------+
+| purchase_price | Sale_price |
++----------------+------------+
+|             12 |         13 |
++----------------+------------+
+1 row in set (0.01 sec)
+
+mysql> Alter table house add column Profit int not null default 1 ;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from house;
++----------------+------------+--------+
+| purchase_price | Sale_price | Profit |
++----------------+------------+--------+
+|             12 |         13 |      1 |
++----------------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> alter table house  drop column profit;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> Alter table house add column Profit int;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from house;
++----------------+------------+--------+
+| purchase_price | Sale_price | Profit |
++----------------+------------+--------+
+|             12 |         13 |   NULL |
++----------------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> alter table house  drop column profit;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> Alter table house add column Profit int not null;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from house;
++----------------+------------+--------+
+| purchase_price | Sale_price | Profit |
++----------------+------------+--------+
+|             12 |         13 |      0 |
++----------------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_abes |
++----------------+
+| companies      |
+| house          |
+| house1         |
+| Palindrome     |
+| Palindrome2    |
+| Student        |
+| Teacher        |
+| user           |
+| Voting         |
+| voting2        |
++----------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from companies;
++---------+--------+---------+---------+
+| supp_Id | Name   | phone   | address |
++---------+--------+---------+---------+
+|       1 | Google | 1234567 | USA     |
+|       2 | Meta   | 1234517 | USA     |
++---------+--------+---------+---------+
+2 rows in set (0.01 sec)
+
+mysql> desc companies;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| supp_Id | tinyint      | NO   | PRI | NULL    | auto_increment |
+| Name    | varchar(25)  | NO   | UNI | NULL    |                |
+| phone   | varchar(10)  | NO   |     | NULL    |                |
+| address | varchar(123) | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> Alter table companies rename column phone to MNo;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc companies;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| supp_Id | tinyint      | NO   | PRI | NULL    | auto_increment |
+| Name    | varchar(25)  | NO   | UNI | NULL    |                |
+| MNo     | varchar(10)  | NO   |     | NULL    |                |
+| address | varchar(123) | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from companies;
++---------+--------+---------+---------+
+| supp_Id | Name   | MNo     | address |
++---------+--------+---------+---------+
+|       1 | Google | 1234567 | USA     |
+|       2 | Meta   | 1234517 | USA     |
++---------+--------+---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> Alter table companies rename column phone to M.No;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.No' at line 1
+mysql> Alter table companies rename column Mno to M.No;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.No' at line 1
+mysql> Alter table companies rename column MNo to M.No;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.No' at line 1
+mysql> Alter table companies rename column MNo to MobileNo;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> Alter table companies rename column MNo to M.No;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.No' at line 1
+mysql> select * from companies;
++---------+--------+----------+---------+
+| supp_Id | Name   | MobileNo | address |
++---------+--------+----------+---------+
+|       1 | Google | 1234567  | USA     |
+|       2 | Meta   | 1234517  | USA     |
++---------+--------+----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> desc coimpanies;
+ERROR 1146 (42S02): Table 'abes.coimpanies' doesn't exist
+mysql> desc companies;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| supp_Id  | tinyint      | NO   | PRI | NULL    | auto_increment |
+| Name     | varchar(25)  | NO   | UNI | NULL    |                |
+| MobileNo | varchar(10)  | NO   |     | NULL    |                |
+| address  | varchar(123) | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> Alter table companies modify column name varchar(30);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc companies;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| supp_Id  | tinyint      | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(30)  | YES  | UNI | NULL    |                |
+| MobileNo | varchar(10)  | NO   |     | NULL    |                |
+| address  | varchar(123) | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from house;
++----------------+------------+--------+
+| purchase_price | Sale_price | Profit |
++----------------+------------+--------+
+|             12 |         13 |      0 |
++----------------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> desc house;
++----------------+------+------+-----+---------+-------+
+| Field          | Type | Null | Key | Default | Extra |
++----------------+------+------+-----+---------+-------+
+| purchase_price | int  | NO   |     | NULL    |       |
+| Sale_price     | int  | NO   |     | NULL    |       |
+| Profit         | int  | NO   |     | NULL    |       |
++----------------+------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> Alter table house add constraints fisher check(purchase_price >120);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fisher check(purchase_price >120)' at line 1
+mysql> Alter table house add constraint fisher check(purchase_price >120);
+ERROR 3819 (HY000): Check constraint 'fisher' is violated.
+mysql> Alter table house add constraint fisher check(purchase_price>0);
+Query OK, 1 row affected (0.02 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> Alter table house add constraint fisher check(purchase_price>12);
+ERROR 3822 (HY000): Duplicate check constraint name 'fisher'.
+mysql> Alter table house drop  constraint fisher;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show create table house;
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                                  |
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| house | CREATE TABLE `house` (
+  `purchase_price` int NOT NULL,
+  `Sale_price` int NOT NULL,
+  `Profit` int NOT NULL,
+  CONSTRAINT `sp` CHECK ((`Sale_price` >= `purchase_price`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> Alter table house add constraint fisher check(purchase_price>12);
+ERROR 3819 (HY000): Check constraint 'fisher' is violated.
+mysql> Alter table house add constraint fishe check(purchase_price>12);
+ERROR 3819 (HY000): Check constraint 'fishe' is violated.
+mysql> Alter table house add constraint fishe check(purchase_price>0);
+Query OK, 1 row affected (0.02 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> insert into house values(-1,12,1);
+ERROR 3819 (HY000): Check constraint 'fishe' is violated.
+mysql> Alter table house drop constraint fishe;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show create table house;
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                                  |
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| house | CREATE TABLE `house` (
+  `purchase_price` int NOT NULL,
+  `Sale_price` int NOT NULL,
+  `Profit` int NOT NULL,
+  CONSTRAINT `sp` CHECK ((`Sale_price` >= `purchase_price`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_abes |
++----------------+
+| companies      |
+| house          |
+| house1         |
+| Palindrome     |
+| Palindrome2    |
+| Student        |
+| Teacher        |
+| user           |
+| Voting         |
+| voting2        |
++----------------+
+10 rows in set (0.00 sec)
+
+mysql> create table Order(
+    -> Id int not null,
+    -> Order_Number int not null,
+    -> order_Date date dEAFAULT currentdate()
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order(
+Id int not null,
+Order_Number int not null,
+order_Date date dEAFAULT curr' at line 1
+mysql> create table Order( Id int not null, Order_Number int not null, order_Date date dEAFAULT curdate() );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order( Id int not null, Order_Number int not null, order_Date date dEAFAULT curd' at line 1
+mysql> create table Order( Id int not null, Order_Number int not null, order_Date date default
+curdate() );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order( Id int not null, Order_Number int not null, order_Date date default curda' at line 1
+mysql> create table Order( Id int not null, Order_Number int not null, order_Date date default
+current_date());
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order( Id int not null, Order_Number int not null, order_Date date default curre' at line 1
+mysql> create table Order( Id int not null, Order_Number int not null, order deafault 12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order( Id int not null, Order_Number int not null, order deafault 12)' at line 1
+mysql> create table Order( Id int not null, Order_Number int not null, order deafault '12');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order( Id int not null, Order_Number int not null, order deafault '12')' at line 1
+mysql> create table Order( Id int not null, Order_Number int not null, order deafault '2');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order( Id int not null, Order_Number int not null, order deafault '2')' at line 1
+mysql> create table order(
+    -> Id Int not null,
+    -> Order_Number int,
+    -> Order_Year year deafault '2002'
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(
+Id Int not null,
+Order_Number int,
+Order_Year year deafault '2002'
+)' at line 1
+mysql> create table order( Id Int not null, Order_Number int, Name varchar );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order( Id Int not null, Order_Number int, Name varchar )' at line 1
+mysql> create table order( Id Int not null, Order_Number int, Name varchar(12) Default 'Abhishek' );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order( Id Int not null, Order_Number int, Name varchar(12) Default 'Abhishek' )' at line 1
+mysql> create table order( Id Int not null, Order_Number int, Name varchar(12) Default 'Abhishek' );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order( Id Int not null, Order_Number int, Name varchar(12) Default 'Abhishek' )' at line 1
+mysql> create table order(Id int not null, Order_Number int, Name varchar(12) Default 'Abhishek');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(Id int not null, Order_Number int, Name varchar(12) Default 'Abhishek')' at line 1
+mysql> create table order(Id int not null, Order_Number int, Name varchar(12) Default "Abhi");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(Id int not null, Order_Number int, Name varchar(12) Default "Abhi")' at line 1
+mysql> create table order(Id int not null, Order_Number int, Name varchar(12) );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(Id int not null, Order_Number int, Name varchar(12) )' at line 1
+mysql> create table order(Id int not null, Order_Number int, Name varchar(12));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(Id int not null, Order_Number int, Name varchar(12))' at line 1
+mysql> create table order(Id int not null, Order_Number int, Name varchar(12));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(Id int not null, Order_Number int, Name varchar(12))' at line 1
+mysql> create table order(Id int not null, Order_Number int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(Id int not null, Order_Number int)' at line 1
+mysql> create table order(Id int not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(Id int not null)' at line 1
+mysql> create table or
+    -> create table or;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'or
+create table or' at line 1
+mysql> create table Order(
+    -> Id int not null,
+    -> order_number int not null
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order(
+Id int not null,
+order_number int not null
+)' at line 1
+mysql> create table Order(Id int not null, order  int not null );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order(Id int not null, order  int not null )' at line 1
+mysql> create table Order(Id int not null, order  int not null, );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order(Id int not null, order  int not null, )' at line 1
+mysql> create table Order
+    -> (
+    -> Id int,
+    -> Name varchar(12)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order
+(
+Id int,
+Name varchar(12)
+)' at line 1
+mysql> show tables;
++----------------+
+| Tables_in_abes |
++----------------+
+| companies      |
+| house          |
+| house1         |
+| Palindrome     |
+| Palindrome2    |
+| Student        |
+| Teacher        |
+| user           |
+| Voting         |
+| voting2        |
++----------------+
+10 rows in set (0.00 sec)
+
+mysql> create show table house;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show table house' at line 1
+mysql> select * from house;
++----------------+------------+--------+
+| purchase_price | Sale_price | Profit |
++----------------+------------+--------+
+|             12 |         13 |      0 |
++----------------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> show create table house;
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                                  |
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| house | CREATE TABLE `house` (
+  `purchase_price` int NOT NULL,
+  `Sale_price` int NOT NULL,
+  `Profit` int NOT NULL,
+  CONSTRAINT `sp` CHECK ((`Sale_price` >= `purchase_price`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> create table Order(
+    -> Id int not null,
+    -> Order_Number int not null,
+    -> Order_Date date nit null
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order(
+Id int not null,
+Order_Number int not null,
+Order_Date date nit null
+)' at line 1
+mysql> create table Order( Id int not null, Order_Number int not null, Order_Date date not null
+ );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order( Id int not null, Order_Number int not null, Order_Date date not null )' at line 1
+mysql> create table Order( Id int not null, Order_Number int not null,Date date not null );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Order( Id int not null, Order_Number int not null,Date date not null )' at line 1
+mysql> create table Or(Id int not null, Order_Number int not null,Date date not null );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Or(Id int not null, Order_Number int not null,Date date not null )' at line 1
+mysql> create table order(
+    -> Id int not null primary key,
+    -> Name varchar(12) not null,
+    -> Order_Date date not null
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(
+Id int not null primary key,
+Name varchar(12) not null, 
+Order_Date date ' at line 1
+mysql> create table order( Id int not null primary key, Name varchar(12) not null );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order( Id int not null primary key, Name varchar(12) not null )' at line 1
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| ABES                 |
+| bankmanagementsystem |
+| Book_shop            |
+| DBMS                 |
+| information_schema   |
+| mysql                |
+| performance_schema   |
+| Practice             |
+| RadheKrishna         |
+| Shirt                |
+| sys                  |
+| Triggers             |
+| View                 |
++----------------------+
+13 rows in set (0.00 sec)
+
+mysql> use Shirt;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table order(
+    -> Id int,
+    -> Name varchar(13),
+    -> Order_time time 
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order(
+Id int,
+Name varchar(13),
+Order_time time 
+)' at line 1
+mysql> CREATE TABLE Persons (
+    ->     PersonID int,
+    ->     LastName varchar(255),
+    ->     FirstName varchar(255),
+    ->     Address varchar(255),
+    ->     City varchar(255)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table order( Id int, Name varchar(13) );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order( Id int, Name varchar(13) )' at line 1
+mysql> create table Nme ( Id int, Name varchar(13) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table order( Id int, Name varchar(13) );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order( Id int, Name varchar(13) )' at line 1
+mysql> create table Food_Order(
+    -> Id tinyint not null,
+    -> Order_Date date nit null,
+    -> nAME VARCHAR(12)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nit null,
+nAME VARCHAR(12)
+)' at line 3
+mysql> create table Food_Order( Id tinyint not null, rDate date not null, nAME VARCHAR(12) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc food_order;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| Id    | tinyint     | NO   |     | NULL    |       |
+| rDate | date        | NO   |     | NULL    |       |
+| nAME  | varchar(12) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> create table Food_Order9
+    -> create table Food_Order(
+    -> Id int not null,
+    -> Order_Number tinyint not null,
+    -> Order_Date date default currentDate
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create table Food_Order(
+Id int not null,
+Order_Number tinyint not null,
+Order_D' at line 2
+mysql> create table Food_Order9 create table Food_Order( Id int not null, Order_Number tinyint
+not null, Name varchar default 'Abhishek' );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create table Food_Order( Id int not null, Order_Number tinyint not null, Name va' at line 1
+mysql>  create table Food_Order( Id int not null, Order_Number tinyint not null, Order_Date date default currentDate );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'currentDate )' at line 1
+mysql>  create table Food_Order( Id int not null, Order_Number tinyint not null,Name varchar(12) );
+ERROR 1050 (42S01): Table 'food_order' already exists
+mysql>  create table Food_Order1( Id int not null, Order_Number tinyint not null,Name varchar(12) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc Food_order1;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Id           | int         | NO   |     | NULL    |       |
+| Order_Number | tinyint     | NO   |     | NULL    |       |
+| Name         | varchar(12) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table food(
+    -> id int not null,
+    -> order_number int not null,
+    -> order
+    -> order_number int not null,;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order
+order_number int not null,' at line 4
+mysql> create table Food(
+    -> Id tinyint not null,
+    -> Order_Number int not null,
+    -> Order_Date date );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table Food1( Id tinyint not null, Order_Number int not null, Name varchar(12) defalt 'CholeChaval' );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'defalt 'CholeChaval' )' at line 1
+mysql> create table Food1( Id tinyint not null, Order_Number int not null, Name varchar(12) default 'CholeChaval' );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc food1;
++--------------+-------------+------+-----+-------------+-------+
+| Field        | Type        | Null | Key | Default     | Extra |
++--------------+-------------+------+-----+-------------+-------+
+| Id           | tinyint     | NO   |     | NULL        |       |
+| Order_Number | int         | NO   |     | NULL        |       |
+| Name         | varchar(12) | YES  |     | CholeChaval |       |
++--------------+-------------+------+-----+-------------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into food1 values(1,12,'PanipURI');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from food1;
++----+--------------+----------+
+| Id | Order_Number | Name     |
++----+--------------+----------+
+|  1 |           12 | PanipURI |
++----+--------------+----------+
+1 row in set (0.00 sec)
+
+mysql> insert into food1(Id,order_Number) values(2,112);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from food1;
++----+--------------+-------------+
+| Id | Order_Number | Name        |
++----+--------------+-------------+
+|  1 |           12 | PanipURI    |
+|  2 |          112 | CholeChaval |
++----+--------------+-------------+
+2 rows in set (0.01 sec)
+
+mysql> CREATE TABLE blog_posts (
+    ->     post_id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     title VARCHAR(255) NOT NULL,
+    ->     content TEXT NOT NULL,
+    ->     published_date DATE DEFAULT CURRENT_DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE
+)' at line 5
+mysql> CREATE TABLE blog_posts (     post_id INT AUTO_INCREMENT PRIMARY KEY,     title VARCHAR(255) NOT NULL,     content TEXT NOT NULL,     published_date DATE DEFAULT CURRENT_DATE() );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE() )' at line 1
+mysql> CREATE TABLE blog_posts (     post_id INT AUTO_INCREMENT PRIMARY KEY,     title VARCHAR(255) NOT NULL,     content TEXT NOT NULL,     published_date DATE DEFAULT Curr_Date());
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Curr_Date())' at line 1
+mysql> CREATE TABLE blog_posts (     post_id INT AUTO_INCREMENT PRIMARY KEY,     title VARCHAR(255) NOT NULL,     content TEXT NOT NULL,     published_date DATE DEFAULT CurDate());
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CurDate())' at line 1
+mysql> create table Foodie(
+    -> Id tinyint not null,
+    -> Order_Item varchar(13) not null,
+    -> order_dt date default curDate()
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'curDate()
+)' at line 4
+mysql> create table Foodie( Id tinyint not null,  Order_Item varchar(13) not null, order_dt date default 'curDate()');
+ERROR 1067 (42000): Invalid default value for 'order_dt'
+mysql> create table Foodie( Id tinyint not null,  Order_Item varchar(13) not null, order_dt date default '2024-05-30');
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table Foodie( Id tinyint not null,  Order_Item varchar(13) not null, order_dt date default (Current_Date));
+ERROR 1050 (42S01): Table 'foodie' already exists
+mysql> create table Foodie1( Id tinyint not null,  Order_Item varchar(13) not null, order_dt date default (Current_Date));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into foodie1(id,order_item) values(1,"Pizzas"),(2,"Burgers");
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from foodie1;
++----+------------+------------+
+| Id | Order_Item | order_dt   |
++----+------------+------------+
+|  1 | Pizzas     | 2024-05-30 |
+|  2 | Burgers    | 2024-05-30 |
++----+------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> show tablkes;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tablkes' at line 1
+mysql> show tables;
++-----------------+
+| Tables_in_shirt |
++-----------------+
+| Food            |
+| Food1           |
+| Food_Order      |
+| Food_Order1     |
+| Foodie          |
+| Foodie1         |
+| Nme             |
+| Persons         |
+| Student         |
++-----------------+
+9 rows in set (0.00 sec)
+
+mysql> create table Customer(
+    -> Cus_Id tinyint not null,
+    -> Name varchar(12) nit null,
+    -> Age int default 23,
+    -> primary key(Cus_Id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nit null,
+Age int default 23,
+primary key(Cus_Id)
+)' at line 3
+mysql> create table Customer(  Cus_Id tinyint not null, Name varchar(12) not null, Age int default 23, primary key(Cus_Id) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show create table customer;
++----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table    | Create Table                                                                                                                                                                                                |
++----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| customer | CREATE TABLE `customer` (
+  `Cus_Id` tinyint NOT NULL,
+  `Name` varchar(12) NOT NULL,
+  `Age` int DEFAULT '23',
+  PRIMARY KEY (`Cus_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into customer values(1,"RadheyMayaa",13);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer;
++--------+-------------+------+
+| Cus_Id | Name        | Age  |
++--------+-------------+------+
+|      1 | RadheyMayaa |   13 |
++--------+-------------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into customer(cus_id,Name) values(2,"Krishna");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++--------+-------------+------+
+| Cus_Id | Name        | Age  |
++--------+-------------+------+
+|      1 | RadheyMayaa |   13 |
+|      2 | Krishna     |   23 |
++--------+-------------+------+
+2 rows in set (0.00 sec)
+
+mysql> create table Fcustomer(
+    -> id tinyint not null,
+    -> Name varchar(23) not  null,
+    -> cus_id tinyint,
+    -> foreign key(cus_id) references customer(cus_id));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc fcustomer;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | tinyint     | NO   |     | NULL    |       |
+| Name   | varchar(23) | NO   |     | NULL    |       |
+| cus_id | tinyint     | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into fcustomer values(1,"ABHI",3);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`shirt`.`fcustomer`, CONSTRAINT `fcustomer_ibfk_1` FOREIGN KEY (`cus_id`) REFERENCES `customer` (`Cus_Id`))
+mysql> insert into fcustomer values(1,"ABHI",32);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`shirt`.`fcustomer`, CONSTRAINT `fcustomer_ibfk_1` FOREIGN KEY (`cus_id`) REFERENCES `customer` (`Cus_Id`))
+mysql> insert into fcustomer values(1,"ABHI",2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from fcustomer;
++----+------+--------+
+| id | Name | cus_id |
++----+------+--------+
+|  1 | ABHI |      2 |
++----+------+--------+
+1 row in set (0.00 sec)
+
+mysql> 

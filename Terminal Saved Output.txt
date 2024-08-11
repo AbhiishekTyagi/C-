@@ -1,0 +1,126 @@
+Last login: Mon Apr  8 20:29:51 on console
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % pwd
+/Users/abhishektyagi_1
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % cd Desktop;
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Desktop % pwd
+/Users/abhishektyagi_1/Desktop
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Desktop % cd Pictures;
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % ls
+RedCake.avif
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % pwd
+/Users/abhishektyagi_1/Desktop/Pictures
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git --version;
+git version 2.44.0
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git init;
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint: 	git config --global init.defaultBranch <name>
+hint: 
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint: 
+hint: 	git branch -m <name>
+Initialized empty Git repository in /Users/abhishektyagi_1/Desktop/Pictures/.git/
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git status;
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.DS_Store
+	RedCake.avif
+
+nothing added to commit but untracked files present (use "git add" to track)
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git add RedCake.avif
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git status;
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   RedCake.avif
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.DS_Store
+
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git remote add origin https://github.com/AbhiishekTyagiii/Pictures
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git remote add origin https://github.com/AbhiishekTyagiii/Pictures.git
+error: remote origin already exists.
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git commit -m "First Cake" 
+[master (root-commit) cc9d39d] First Cake
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 RedCake.avif
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git push -u origin master 
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 22.38 KiB | 22.38 MiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/AbhiishekTyagiii/Pictures
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git status;
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.DS_Store
+
+nothing added to commit but untracked files present (use "git add" to track)
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % pwd
+/Users/abhishektyagi_1/Desktop/Pictures
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % ls
+RedCake.avif	RedCake.jpeg
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git init;
+Reinitialized existing Git repository in /Users/abhishektyagi_1/Desktop/Pictures/.git/
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git status;
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.DS_Store
+	RedCake.jpeg
+
+nothing added to commit but untracked files present (use "git add" to track)
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git add RedCake.jpeg
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git status;
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   RedCake.jpeg
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.DS_Store
+
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git remote add origin https://github.com/AbhiishekTyagiii/Pictures      
+error: remote origin already exists.
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git commit -m "First Cake" 
+[master 9774f93] First Cake
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 RedCake.jpeg
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % git push -u origin master 
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 53.33 KiB | 53.33 MiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/AbhiishekTyagiii/Pictures
+   cc9d39d..9774f93  master -> master
+branch 'master' set up to track 'origin/master'.
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % pwd
+/Users/abhishektyagi_1/Desktop/Pictures
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % quit;
+zsh: command not found: quit
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air Pictures % 

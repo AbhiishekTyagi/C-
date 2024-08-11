@@ -1,0 +1,13 @@
+li{
+    color:blue;
+    color:aqua;
+}
+#main{
+    color:greenyellow;
+}
+.Casecade{
+    color:bisque;
+}
+li[draggable="False"]{
+    color:aqua;
+}
